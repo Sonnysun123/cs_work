@@ -1,0 +1,31 @@
+psuedocode:
+    repeat this 5 times:
+        totalCents = generate a random number from 0 to 99
+
+        halfDollar = how many halfDollars are in totalCents
+        halfDollarRemainder = remaining cents after subtracting all halfDollar
+
+        quarters = how many quarters are in halfDollarRemainder
+        quartersRemainder = remaining cents after subtracting all quarters from halfDollarRemainder
+
+        dimes = how many dimes are in quartersRemainder
+        dimesRemainder = remaining cents after subtracting all dimes from quartersRemainder
+
+        the same logic appplies to nickels and pennies...
+        
+        print(totalCents)
+
+        if (halfDollar > 0):
+            if (halfDollar == 1):
+                print(singular version of half-dollar, halfDollars)
+            else:
+                print(plural version of half-dollar, halfDollars)
+
+        if (quarters > 0):
+            if (quarters == 1):
+                print(singular version of quarter, quarters)
+            else:
+                print(plural version of quarters, quarters)
+
+        do the same for nickels and pennies as well.
+            

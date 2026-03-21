@@ -1,0 +1,15 @@
+Psuedocode 
+
+Create a function printMessage(count)
+    PRINT count + ". Java Programming really fun."
+
+    IF count < 10 THEN
+        INCREMENT count by 1
+        CALL printMessage(count)
+    END IF
+END FUNCTION
+
+PROGRAM Main
+    SET count = 1
+    CALL printMessage(count)
+END PROGRAM

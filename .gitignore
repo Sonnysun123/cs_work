@@ -1,0 +1,32 @@
+# --- Java ---
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+
+# --- C / C++ ---
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# --- IDEs and OS files ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

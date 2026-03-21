@@ -1,0 +1,13 @@
+/*psuedo code
+  create scanner object
+  double beerConsump = get user input for beer consumption per day
+  double beerPrice = get user input for price per beer
+  double beerPerYear = beerConsump * 365 
+  double caloriesPerYear = beerConsump * 150 * 365 
+  double weightGainPerYear = beerConsump * 15 
+  double moneySpentPerYear = beerConsump * beerPrice * 365
+  print(beerPerYear), round to two decimal places
+  print(caloriesPerYear), round to two decimal places
+  print(weightGainPerYear), round to two decimal places
+  print(moneySpentPerYear), round to two decimal places
+*/
