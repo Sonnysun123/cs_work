@@ -6,14 +6,15 @@
 #include <string>
 
 using namespace std;
+
 void Close2Files(ifstream& inputFile1, ofstream& outputFile);
 void Close3Files(ifstream& topLayer, ifstream& bottomLayer, ofstream& outputFile);
 void Close4Files(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ofstream& outputFile);
-void Close4SpecialFiles(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
+void Close4(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
 void Load2Streams(string& inputFile1Path, string& outputPath, ifstream& inputFile1, ofstream& outputFile);
 void Load3Streams(string& topLayerPath, string& bottomLayerPath, string& outputPath, ifstream& topLayer, ifstream& bottomLayer, ofstream& outputFile);
 void Load4Streams(string& inputFile1Path, string& inputFile2Path, string& inputFile3Path, string& outputPath, ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ofstream& outputFile);
-void Load4SpecialStreams(string& inputFile1Path, string& outputFile1Path, string& outputFile2Path, string& outputFile3Path, ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
+void Load4Streams(string& inputFile1Path, string& outputFile1Path, string& outputFile2Path, string& outputFile3Path, ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
 string CheckIdenticalImage(ifstream& example, ifstream& newFile);
 void CheckTask(string& examplePath, string& outputPath, ifstream& exampleFile, ifstream& newFile);
 
@@ -100,9 +101,9 @@ int main() {
     ofstream outputFile1;
     ofstream outputFile2;
     ofstream outputFile3;
-    Load4SpecialStreams(inputFile1Path, outputFile1Path, outputFile2Path, outputFile3Path, inputFile1, outputFile1, outputFile2, outputFile3);
+    Load4Streams(inputFile1Path, outputFile1Path, outputFile2Path, outputFile3Path, inputFile1, outputFile1, outputFile2, outputFile3);
     Task8(inputFile1, outputFile1, outputFile2, outputFile3);
-    Close4SpecialFiles(inputFile1, outputFile1, outputFile2, outputFile3);
+    Close4(inputFile1, outputFile1, outputFile2, outputFile3);
     CheckTask(examplePath1, outputFile1Path, exampleFile, newFile);
     CheckTask(examplePath2, outputFile2Path, exampleFile, newFile);
     CheckTask(examplePath3, outputFile3Path, exampleFile, newFile);
@@ -124,6 +125,8 @@ int main() {
     Task10(inputFile1, outputFile);
     Close2Files(inputFile1, outputFile);
     CheckTask(examplePath, outputPath, exampleFile, newFile);
+    /*==========================Task Extra Credit============================*/
+
 }   
 
 
@@ -170,7 +173,7 @@ void Load4Streams(string& inputFile1Path, string& inputFile2Path, string& inputF
     }
 
 }   
-void Load4SpecialStreams(string& inputFile1Path, string& outputFile1Path, string& outputFile2Path, string& outputFile3Path, ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3) {
+void Load4Streams(string& inputFile1Path, string& outputFile1Path, string& outputFile2Path, string& outputFile3Path, ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3) {
     inputFile1.open(inputFile1Path,ios::binary);
     outputFile1.open(outputFile1Path,ios::binary);
     outputFile2.open(outputFile2Path, ios::binary);
@@ -205,7 +208,7 @@ void Close4Files(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile
     inputFile3.close();
     outputFile.close();
 }
-void Close4SpecialFiles(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3) {
+void Close4(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3) {
     inputFile1.close();
     outputFile1.close();
     outputFile2.close();
