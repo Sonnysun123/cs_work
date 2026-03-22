@@ -1,6 +1,6 @@
 /** *****************************************************************
  *  Written by Hexuan Sun
- *  Date: March , 20, 2026
+ *  Date: March, 20, 2026
  *  Purpose: This program provides a GUI via JOptionPane to 
  * manage a collection of individuals. It allows users to categorize 
  * entries as general Persons, Actors, or Prisoners, store them in an  
