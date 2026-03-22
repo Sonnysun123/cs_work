@@ -10,11 +10,13 @@ using namespace std;
 void Close2Files(ifstream& inputFile1, ofstream& outputFile);
 void Close3Files(ifstream& topLayer, ifstream& bottomLayer, ofstream& outputFile);
 void Close4Files(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ofstream& outputFile);
-void Close4(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
+void Close4Files(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
+void Close5Files(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ifstream& inputFile4, ofstream& outputFile);
 void Load2Streams(string& inputFile1Path, string& outputPath, ifstream& inputFile1, ofstream& outputFile);
 void Load3Streams(string& topLayerPath, string& bottomLayerPath, string& outputPath, ifstream& topLayer, ifstream& bottomLayer, ofstream& outputFile);
 void Load4Streams(string& inputFile1Path, string& inputFile2Path, string& inputFile3Path, string& outputPath, ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ofstream& outputFile);
 void Load4Streams(string& inputFile1Path, string& outputFile1Path, string& outputFile2Path, string& outputFile3Path, ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
+void Load5Streams(string& inputFile1Path, string& inputFile2Path, string& inputFile3Path, string& inputFile4Path, string& outputPath, ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ifstream& inputFile4, ofstream& outputFile);
 string CheckIdenticalImage(ifstream& example, ifstream& newFile);
 void CheckTask(string& examplePath, string& outputPath, ifstream& exampleFile, ifstream& newFile);
 
@@ -103,7 +105,7 @@ int main() {
     ofstream outputFile3;
     Load4Streams(inputFile1Path, outputFile1Path, outputFile2Path, outputFile3Path, inputFile1, outputFile1, outputFile2, outputFile3);
     Task8(inputFile1, outputFile1, outputFile2, outputFile3);
-    Close4(inputFile1, outputFile1, outputFile2, outputFile3);
+    Close4Files(inputFile1, outputFile1, outputFile2, outputFile3);
     CheckTask(examplePath1, outputFile1Path, exampleFile, newFile);
     CheckTask(examplePath2, outputFile2Path, exampleFile, newFile);
     CheckTask(examplePath3, outputFile3Path, exampleFile, newFile);
@@ -126,7 +128,17 @@ int main() {
     Close2Files(inputFile1, outputFile);
     CheckTask(examplePath, outputPath, exampleFile, newFile);
     /*==========================Task Extra Credit============================*/
-
+    inputFile1Path = path.taskECPath[0];
+    inputFile2Path = path.taskECPath[1];
+    inputFile3Path = path.taskECPath[2];
+    string inputFile4Path = path.taskECPath[3];
+    outputPath = path.taskECPath[4];
+    examplePath = path.examplePath[12];
+    ifstream inputFile4;
+    Load5Streams(inputFile1Path, inputFile2Path, inputFile3Path, inputFile4Path, outputPath, inputFile1, inputFile2, inputFile3, inputFile4, outputFile);
+    TaskEC(inputFile1, inputFile2, inputFile3, inputFile4, outputFile);
+    Close5Files(inputFile1, inputFile2, inputFile3, inputFile4, outputFile);
+    CheckTask(examplePath, outputPath, exampleFile, newFile);
 }   
 
 
@@ -191,12 +203,32 @@ void Load4Streams(string& inputFile1Path, string& outputFile1Path, string& outpu
         exit(1);
     }
 }
+void Load5Streams(string& inputFile1Path, string& inputFile2Path, string& inputFile3Path, string& inputFile4Path, string& outputPath, ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ifstream& inputFile4, ofstream& outputFile) {
+ inputFile1.open(inputFile1Path, ios::binary);
+    inputFile2.open(inputFile2Path, ios::binary);
+    inputFile3.open(inputFile3Path, ios::binary);
+    inputFile4.open(inputFile4Path, ios::binary);
+    outputFile.open(outputPath, ios::binary);
+
+    if (!inputFile1.is_open() || !inputFile2.is_open() || !inputFile3.is_open() || !inputFile4.is_open() || !outputFile.is_open()) {
+        if (!inputFile1.is_open())
+            cout << "input file 1 error" << endl;
+        if (!inputFile2.is_open())
+            cout << "input file 2 error" << endl;
+        if (!inputFile3.is_open())
+            cout << "input file 3 error" << endl;
+        if (!inputFile4.is_open())
+            cout << "input file 4 error" << endl;
+        if (!outputFile.is_open())
+            cout << "output file error" << endl;
+        cout << "Error opening file" << endl;
+        exit(1);
+    }
+}
 void Close2Files(ifstream& inputFile1, ofstream& outputFile) {
     inputFile1.close();
     outputFile.close();
 }
-
-
 void Close3Files(ifstream& topLayer, ifstream& bottomLayer, ofstream& outputFile) {
     topLayer.close();
     bottomLayer.close();
@@ -208,11 +240,18 @@ void Close4Files(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile
     inputFile3.close();
     outputFile.close();
 }
-void Close4(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3) {
+void Close4Files(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3) {
     inputFile1.close();
     outputFile1.close();
     outputFile2.close();
     outputFile3.close();
+}
+void Close5Files(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ifstream& inputFile4, ofstream& outputFile) {
+    inputFile1.close();
+    inputFile2.close();
+    inputFile3.close();
+    inputFile4.close();
+    outputFile.close();
 }
 string CheckIdenticalImage(ifstream& example, ifstream& newFile) {
    
@@ -238,11 +277,9 @@ string CheckIdenticalImage(ifstream& example, ifstream& newFile) {
         example.read(buffer1.data(), bufferSize);
         newFile.read(buffer2.data(), bufferSize);
 
-        // Check how many bytes were actually read
         if (example.gcount() != newFile.gcount()) 
             return "Byte not read the same";
         
-        // Compare the buffers
         if (!std::equal(buffer1.begin(), buffer1.begin() + example.gcount(), buffer2.begin())) {
             return "Buffer not the same";
         }

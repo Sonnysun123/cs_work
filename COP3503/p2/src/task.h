@@ -12,6 +12,7 @@ void Task7(ifstream& inputFile1, ofstream& outputFile);
 void Task8(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3);
 void Task9(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ofstream& outputFile);
 void Task10(ifstream& inputFile1, ofstream& outputFile);
+void TaskEC(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ifstream& inputFile4, ofstream& outputFile);
 
 
 

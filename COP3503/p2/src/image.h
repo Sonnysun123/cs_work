@@ -7,7 +7,6 @@
 using namespace std;
 
 struct Image {
-
     Header header;
     vector<Pixel> data;
     int pixelCount;

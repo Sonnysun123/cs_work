@@ -14,4 +14,5 @@ struct Path {
     vector<string> task8Path = {"input/car.tga", "output/part8_r.tga", "output/part8_g.tga", "output/part8_b.tga"};
     vector<string> task9Path = {"input/layer_red.tga", "input/layer_green.tga", "input/layer_blue.tga", "output/part9.tga"};
     vector<string> task10Path = {"input/text2.tga", "output/part10.tga"};
-};
+    vector<string> taskECPath = {"input/car.tga", "input/circles.tga", "input/pattern1.tga", "input/text.tga", "output/extracredit.tga"};
+};  

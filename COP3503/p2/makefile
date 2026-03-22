@@ -7,4 +7,4 @@ run:
 	project2.out
 clean:
 	del output\*.tga
-	del project.out
+	del project2.out

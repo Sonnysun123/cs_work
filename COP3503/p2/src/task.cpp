@@ -86,7 +86,6 @@ void Task6(ifstream& inputFile1, ofstream& outputFile) {
     }
     outputImage.Serialize(outputFile);
 }
-
 void Task7(ifstream& inputFile1, ofstream& outputFile) {
     Image inputImage;
     Image outputImage;
@@ -109,7 +108,6 @@ void Task7(ifstream& inputFile1, ofstream& outputFile) {
     }
     outputImage.Serialize(outputFile);
 }
-
 void Task8(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, ofstream& outputFile3) {
     Image inputImage;
     Image outputImage1;
@@ -143,7 +141,6 @@ void Task8(ifstream& inputFile1, ofstream& outputFile1, ofstream& outputFile2, o
     outputImage2.Serialize(outputFile2);
     outputImage3.Serialize(outputFile3);
 }
-
 void Task9(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ofstream& outputFile) {
     Image redImage, greenImage, blueImage, outputImage;
     redImage.Deserialize(inputFile1);
@@ -176,6 +173,92 @@ void Task10(ifstream& inputFile1, ofstream& outputFile) {
     }
     for (int i = outputImage.pixelCount - 1; i >= 0; i--) {
         outputImage.data.push_back(reversePixel[i]);
+    }
+    outputImage.Serialize(outputFile);
+}
+void TaskEC(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ifstream& inputFile4, ofstream& outputFile) {
+    Image topLeft, topRight, bottomLeft, bottomRight, outputImage;
+    topLeft.Deserialize(inputFile1);
+    topRight.Deserialize(inputFile2);
+    bottomRight.Deserialize(inputFile3);
+    bottomLeft.Deserialize(inputFile4);
+
+    outputImage.header = topLeft.header;
+    outputImage.header.height = topLeft.header.height + bottomLeft.header.height;
+    outputImage.header.width = topLeft.header.width + topRight.header.width;
+    outputImage.pixelCount = outputImage.header.height * outputImage.header.width;
+
+    unsigned char red, green, blue;
+    int bottomPixelCount = bottomLeft.header.height * bottomLeft.header.width + bottomRight.header.height * bottomRight.header.width;
+    int topPixelCount = topLeft.header.height * topLeft.header.width + topRight.header.height * topRight.header.width;
+    int widthCounter = 0;
+    int heightCounter = 0;
+    int bottomLeftWidthCounter = 0;
+    int bottomRightWidthCounter = 0;
+
+    for (int i = 0; i < bottomPixelCount; i++) {
+        if (widthCounter == bottomLeft.header.width + bottomRight.header.width) {
+            widthCounter = 0;
+            bottomLeftWidthCounter = 0;
+            bottomRightWidthCounter = 0;
+            heightCounter++;
+        }
+        if (widthCounter < bottomLeft.header.width) {
+            int index = bottomLeftWidthCounter + (heightCounter * bottomLeft.header.width);
+            red = bottomLeft.data[index].red;
+            green = bottomLeft.data[index].green;
+            blue = bottomLeft.data[index].blue;
+            Pixel pixel(blue, green, red);
+            outputImage.data.push_back(pixel);
+
+            bottomLeftWidthCounter++;
+            widthCounter++;
+        }
+        else {
+            int index = bottomRightWidthCounter + (heightCounter * bottomRight.header.width);
+            red = bottomRight.data[index].red;
+            green = bottomRight.data[index].green;
+            blue = bottomRight.data[index].blue;
+            Pixel pixel(blue, green, red);
+            outputImage.data.push_back(pixel);
+            bottomRightWidthCounter++;
+            widthCounter++;
+        }
+
+    }
+
+    int topLeftWidthCounter = 0;
+    int topRightWidthCounter = 0;
+    widthCounter = 0;
+    heightCounter = 0;
+    
+    for (int i = 0; i < topPixelCount; i++) {
+        if (widthCounter == topLeft.header.width + topRight.header.width) {
+            widthCounter = 0;
+            topLeftWidthCounter = 0;
+            topRightWidthCounter = 0;
+            heightCounter++;
+        }
+        if (widthCounter < topLeft.header.width) {
+            int index = topLeftWidthCounter + (heightCounter * topLeft.header.width);
+            red = topLeft.data[index].red;
+            green = topLeft.data[index].green;
+            blue = topLeft.data[index].blue;
+            Pixel pixel(blue, green, red);
+            outputImage.data.push_back(pixel);
+            topLeftWidthCounter++;
+            widthCounter++;
+        }
+        else {
+            int index = topRightWidthCounter + (heightCounter * topRight.header.width);
+            red = topRight.data[index].red;
+            green = topRight.data[index].green;
+            blue = topRight.data[index].blue;
+            Pixel pixel(blue, green, red);
+            outputImage.data.push_back(pixel);
+            topRightWidthCounter++;
+            widthCounter++;
+        }
     }
     outputImage.Serialize(outputFile);
 }
