@@ -224,7 +224,6 @@ void TaskEC(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, if
             bottomRightWidthCounter++;
             widthCounter++;
         }
-
     }
 
     int topLeftWidthCounter = 0;

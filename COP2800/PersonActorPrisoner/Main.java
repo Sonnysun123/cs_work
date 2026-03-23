@@ -186,7 +186,7 @@ public class Main {
         }
         return yearRemained;
     } //end of askYearRemained method
-    
+    /*==============================Choices============================== */
     public static void switchChoices(int choice, ArrayList<Person> personList) { //Switch options
           switch (choice) {
             case 1:
@@ -209,7 +209,6 @@ public class Main {
                 break;
         }
     } //end of switchChoices method
-    
     public static void choice1(ArrayList<Person> personList) { //Adds Person
         Name name = askName();
         double height = askHeight();

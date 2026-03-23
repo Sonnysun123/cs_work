@@ -1,44 +1,33 @@
-// "New" means new compared to previous level
+
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-typedef struct Home_struct {
-   int numRooms;
-   int numOccupants;
-} Home;
+void FindNumber(int number, int lowVal, int highVal) {
+   int midVal;
 
-void Home_SetData(Home* itemPtr, int rooms, int occupants) {
-   if (itemPtr == NULL) return;
-   
-   itemPtr->numRooms = rooms;
-   itemPtr->numOccupants = occupants;
-}
+   midVal = (highVal + lowVal) / 2;
+   printf("%d %d", number, midVal);
 
-// New: Home_AddOccupants()
-void Home_AddOccupants(Home* itemPtr, int occupants) {
-   if (itemPtr == NULL) return;
-
-   itemPtr->numOccupants += occupants;
-}
-
-void Home_PrintHome(Home* itemPtr) {
-   if (itemPtr == NULL) return;
-   
-   printf("%d rooms, %d occupants\n", itemPtr->numRooms, itemPtr->numOccupants); 
+   if (number == midVal) {    // Base case
+      printf(" a\n");
+   }
+   else {
+      if (number < midVal) {  // First recursive case
+         printf(" b\n");
+         FindNumber(number, lowVal, midVal);
+      }
+      else {                  // Second recursive case
+         printf(" c\n");
+         FindNumber(number, midVal + 1, highVal);
+      }
+   }
 }
 
 int main(void) {
-   Home* myHome = NULL;
+   int number;
 
-   myHome = (Home*)malloc(sizeof(Home));
-
-   Home_SetData(myHome, 5, 2);
-   Home_PrintHome(myHome);
-
-   Home_AddOccupants(myHome, 4);
-   Home_PrintHome(myHome);
-
-   free(myHome);
-
+   scanf("%d", &number);
+   FindNumber(number, 0, 10);
+   
    return 0;
 }
