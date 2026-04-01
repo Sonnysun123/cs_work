@@ -3,6 +3,7 @@
 class Level1 {
     public:
     virtual void method1() = 0; // Pure virtual function
+    virtual ~Level1();
 };
 
 class Level2 : public Level1 {

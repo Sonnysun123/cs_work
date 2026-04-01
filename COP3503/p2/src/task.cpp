@@ -153,8 +153,8 @@ void Task9(ifstream& inputFile1, ifstream& inputFile2, ifstream& inputFile3, ofs
         red = redImage.data[i].red;
         green = greenImage.data[i].green;
         blue = blueImage.data[i].blue;
-        Pixel pixe(blue, green, red);
-        outputImage.data.push_back(pixe);
+        Pixel pixel(blue, green, red);
+        outputImage.data.push_back(pixel);
     }
     outputImage.Serialize(outputFile);
 }
