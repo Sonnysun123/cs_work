@@ -1,0 +1,19 @@
+CompileFlags:
+  CompilationDatabase: build
+  Add: 
+    - -std=c++17             # Use C++17 standard
+    - -Wall                  # Enable most common compiler warnings
+    - -Wextra                # Enable even more picky warnings
+    - -Wshadow               # Warn if a local variable hides a global/outer variable
+    - -D_GLIBCXX_DEBUG       # Enable STL boundary checks (finds array bugs, slows runtime)
+    - --target=x86_64-w64-windows-gnu # Forces Clang to use your MinGW/Windows settings
+    
+    # newly added
+    - -Wformat=2             # Stricter checks for printf/scanf format strings
+    - -Wfloat-equal          # Warn about comparing floats with == due to precision
+    - -Wconversion           # Warn if data is lost in type changes (e.g., double to int)
+    - -Wpedantic             # Ensure code follows strict ISO C++ standards (no shortcuts)
+    - -Wnull-dereference     # Warn if a pointer might be null when used
+    - -Wnon-virtual-dtor     # Warns if a class has virtual functions but lacks a virtual destructor (prevents memory leaks in inheritance)
+    - -Wold-style-cast       # Warns if you use C-style casts (int)x instead of C++ casts static_cast<int>(x)
+    - -Wunused               # Combo flag that warns about unused variables, functions, or parameters

@@ -1,0 +1,237 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+
+// input from user on whether they want a receipt or not
+// global variable so that functions can use it as well
+int receipt_input;
+
+// user gets assigned a fixed balance
+double balance = 123.4567;
+
+// list of cash amounts used for fast cash
+// 0 is a padding so it indexes correctly
+double fast_cash_amounts[] = {0,20,40,80,100};
+
+void clearScreen(){
+	system("cls");
+}
+
+void giveCardBack(){
+    // prints goodby message when giving card back
+    printf("Thank you for using our virtual bank system.\n");
+
+    if(receipt_input == 1){
+        // user wanted a receipt, print it
+        printf("Receipt printed, goodbye!\n");
+    }else{
+        printf("Goodbye!\n");
+    }
+}
+
+// returns option from user
+int transactionPrompt(){
+    int option = 0;
+
+    // keep displaying prompt until the input from user is valid
+    while(option < 1 || option > 5){
+        // clear screen
+        clearScreen();
+
+        // display the 5 options
+        printf("CHOOSE FROM THE FOLLOWING\n");
+        printf(" 1 -> Fast Cash         Withdraw      <- 2\n");
+        printf(" 3 -> Deposit           Check Balance <- 4\n");
+        printf(" 5 -> Get Card Back\n");
+        printf(" Enter your choice: ");
+        // get input
+        scanf("%d", &option);
+        if(option < 1 || option > 5){
+            // invalid user input
+            printf("Invalid Entry, try again...\n");
+        }
+    }
+    return option;
+}
+
+// performs the appropriate action based on the selected option
+// returns whether or not the program should exit
+bool transactionHandler(int option){
+    clearScreen();
+    
+    // fast cash
+    if(option == 1){
+        // keep getting input from user until it is valid
+        clearScreen();
+        while(true){
+            printf("0 to cancel\n");
+            printf("1 --> $20.00        $40.00  <-- 2\n");
+            printf("3 --> $80.00        $100.00 <-- 4\n");
+            // get input
+            int fast_cash_input;
+            scanf("%d", &fast_cash_input);
+
+            if(fast_cash_input < 0 || fast_cash_input > 4){
+                printf("invalid option, try again...\n");
+            }else if(fast_cash_input == 0){
+                // cancel current transaction
+                return false;
+            }else{
+                // get cash amount from array
+                double desired_fast_cash_amount = fast_cash_amounts[fast_cash_input];
+
+                // check if user has enough balance to widthdraw
+                if(balance < desired_fast_cash_amount){
+                    printf("Not enough balance!\n");
+                }else{
+                    // finish the transaction and update balance
+                    balance -= desired_fast_cash_amount;
+                    printf("Take your cash...\n");
+                    return false;
+                }
+            }
+        }
+    }else if(option == 2){
+        // widthdraw
+        while(true){
+            printf("Enter amount (enter 0 to cancel):");
+            // get input for amount
+            double widthdraw_input;
+            scanf("%lf", &widthdraw_input);
+            if(widthdraw_input == 0){
+                // cancelled
+                return false;
+            }else{
+                // check if the widthdraw amount is within what the user has
+                if(widthdraw_input < 0){
+                    printf("Cannot widthdraw a negative amount!\n");
+                }else if(widthdraw_input > balance){
+                    printf("Not enough balance!\n");
+                }else{
+                    // finish transaction and update balance
+                    balance -= widthdraw_input;
+                    printf("Take your cash...\n");
+                    return false;
+                }
+            }
+        }
+    }else if(option == 3){
+        // deposit
+        while(true){
+            printf("Enter amount to deposit (enter 0 to cancel):");
+            // get input for amount
+            double deposit_input;
+            scanf("%lf", &deposit_input);
+            if(deposit_input == 0){
+                // cancelled
+                return false;
+            }else{
+                // check if the widthdraw amount is within what the user has
+                if(deposit_input < 0){
+                    printf("Cannot deposit a negative amount!\n");
+                }else{
+                    // update balance
+                    balance += deposit_input;
+                    printf("Insert your cash...\n");
+                    return false;
+                }
+            }
+        }
+    }else if(option == 4){
+        // check balance
+        // this is already part of the transaction end prompt,
+        // so we don't have to do anything here
+    }else if(option == 5){
+        giveCardBack();
+        return true;
+    }
+    // continue doing transactions
+    return false;
+}
+
+// displays the prompt when ending a transaction
+// returns if the program should exit or not
+bool transactionEndPrompt(){
+    while(true){
+        clearScreen();
+        // prints balance to 2 decimal places
+        printf("Your Balance is: $%.2lf\n", balance);
+        // displays new options
+        printf("1 -> Another Transaction        Get Card Back <- 2\n");
+
+        int new_option_input;
+        // gets input
+        scanf("%d",&new_option_input);
+
+        if(new_option_input != 1 && new_option_input != 2){
+            // incorrect input, tries again
+            printf("Invalid option, try again\n");
+        }else if(new_option_input == 2){
+            // want to give card back and exit the program
+            giveCardBack();
+            return true;
+        }else if(new_option_input == 1){
+            // make another transaction, do not exit program
+            return false;
+        }
+    }
+    return false;
+}
+
+int main(void) {
+    printf("Welcome to the Best Virtual Bank!\n\n");
+
+    printf("Enter Pin: ");
+
+    int trial = 1;
+
+    // give 3 attempts to input the pin
+    for(;trial <= 3;trial++){
+        int pin;
+        scanf("%d", &pin);
+
+        if(pin >= 1000 && pin <= 9999){
+            break;
+        }else{
+            // don't print on final trial since user cannot re-enter pin
+            if(trial != 3){
+                printf("Invalid PIN, Re-enter pin: ");
+            }
+        }
+    }
+
+    // too many trials used
+    if(trial > 3){
+        printf("Sorry you can’t continue, contact your bank for assistance!\n");
+		exit(100);
+    }
+
+    clearScreen();
+    
+    // prompt for receipt
+    printf("Receipt?\n");
+    printf("1 for YES, 2 for NO\n");
+            
+    // get input for receipt
+    scanf("%d", &receipt_input);
+
+    int option;
+
+    while(true){
+        // get option
+        option = transactionPrompt();
+
+        // handle transaction
+        bool should_exit = transactionHandler(option);
+        if(should_exit){
+			exit(100);
+        }
+        // show end of transaction prompt
+        should_exit = transactionEndPrompt();
+        if(should_exit){
+			exit(100);
+        }
+    }
+
+    return 0;
+}
