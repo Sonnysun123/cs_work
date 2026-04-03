@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -std=gnu++17 -o CMakeFiles\\SFMLTest.dir\\src\\main.cpp.obj -c \"C:\\Users\\amych\\OneDrive\\Desktop\\cs_work\\COP3503\\p3 - Copy\\src\\main.cpp\"",
+  "file": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/src/main.cpp",
+  "output": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build/CMakeFiles/SFMLTest.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -std=gnu++17 -o CMakeFiles\\SFMLTest.dir\\src\\Board.cpp.obj -c \"C:\\Users\\amych\\OneDrive\\Desktop\\cs_work\\COP3503\\p3 - Copy\\src\\Board.cpp\"",
+  "file": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/src/Board.cpp",
+  "output": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build/CMakeFiles/SFMLTest.dir/src/Board.cpp.obj"
+},
+{
+  "directory": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -std=gnu++17 -o CMakeFiles\\SFMLTest.dir\\src\\TextureManager.cpp.obj -c \"C:\\Users\\amych\\OneDrive\\Desktop\\cs_work\\COP3503\\p3 - Copy\\src\\TextureManager.cpp\"",
+  "file": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/src/TextureManager.cpp",
+  "output": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build/CMakeFiles/SFMLTest.dir/src/TextureManager.cpp.obj"
+},
+{
+  "directory": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -std=gnu++17 -o CMakeFiles\\SFMLTest.dir\\src\\Tile.cpp.obj -c \"C:\\Users\\amych\\OneDrive\\Desktop\\cs_work\\COP3503\\p3 - Copy\\src\\Tile.cpp\"",
+  "file": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/src/Tile.cpp",
+  "output": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3 - Copy/build/CMakeFiles/SFMLTest.dir/src/Tile.cpp.obj"
+}
+]

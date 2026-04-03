@@ -7,7 +7,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
 
-file(GLOB SRC_FILES CONFIGURE_DEPENDS src/*.cpp)
-
-add_executable(SFMLTest ${SRC_FILES})
+add_executable(SFMLTest 
+src/main.cpp
+src/Board.cpp
+src/TextureManager.cpp
+src/Tile.cpp                )
 target_link_libraries(SFMLTest PRIVATE sfml-graphics sfml-window sfml-system)

@@ -1,0 +1,6 @@
+# ninja log v7
+78	387	7968596653348715	CMakeFiles/SFMLTest.dir/src/Tile.cpp.obj	3db9410270422734
+47	1350	7968596653042172	CMakeFiles/SFMLTest.dir/src/main.cpp.obj	5f832f170d169722
+61	1529	7968596653178725	CMakeFiles/SFMLTest.dir/src/TextureManager.cpp.obj	92e3362f0a49e92
+54	2398	7968596653113325	CMakeFiles/SFMLTest.dir/src/Board.cpp.obj	86de66fbbfeb8440
+2399	2654	7968596676552421	SFMLTest.exe	4c8ebd3ca58206cf
