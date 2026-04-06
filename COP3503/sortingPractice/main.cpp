@@ -20,6 +20,4 @@ int main() {
     a = BinarySearch(numbers, target);
     timer.printTime("Binary search: ");
     std::cout << "Location: " << a << std::endl;
-
-
 }

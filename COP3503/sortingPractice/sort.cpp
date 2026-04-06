@@ -50,7 +50,7 @@ void InsertionSort(std::vector<int>& numbers) {
     //Start with 2nd element
     for (size_t sortedIndex = 1; sortedIndex < numbers.size(); sortedIndex++) { 
         size_t currentIndex = sortedIndex;
-        //Stops when current value isn't less than the one before it
+        //Stops when current value greater than the one before it
         while (currentIndex > 0 && numbers[currentIndex] < numbers[currentIndex - 1]) {
             std::swap(numbers[currentIndex], numbers[currentIndex - 1]);
             currentIndex--;

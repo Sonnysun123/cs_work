@@ -6,7 +6,7 @@ struct Timer {
     using Clock = std::chrono::steady_clock; //alias
     using timePoint = Clock::time_point;
     using Duration = std::chrono::duration<double>;
-    
+
     timePoint _start;
     Timer() {
         _start = Clock::now();
@@ -18,10 +18,10 @@ struct Timer {
     void reset() {
         _start = Clock::now();
     }
-    void printTime() const{
+    void printTime() const {
         std::cout << "Unknown elapsed time: " << this->elapsedSeconds() << std::endl;
     }
-    void printTime(const char* message) const{
+    void printTime(const char* message) const {
         std::cout << message << this->elapsedSeconds() << std::endl;
     }
 };
