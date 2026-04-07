@@ -24,6 +24,6 @@ int main() {
     //lambda
     auto PrintX = [](){cout << "3" << endl;};
     functions.AddAction(PrintX);
-
+    functions.DoAllActions();
     return 0;
 }
