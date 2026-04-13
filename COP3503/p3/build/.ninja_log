@@ -1,5 +1,7 @@
 # ninja log v7
-28	87	7977963950006778	C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/CMakeFiles/cmake.verify_globs	bfd992fd7aae3eb4
-94	333	7977963950612748	CMakeFiles/SFMLTest.dir/src/main.cpp.obj	a70d1a2139cb1b88
-90	483	7977963950572696	CMakeFiles/SFMLTest.dir/src/TextureStore.cpp.obj	6fed945f75c436ec
-483	590	7977963954493867	SFMLTest.exe	8f1c37a048ee5e4e
+30	98	7977986455466444	C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/CMakeFiles/cmake.verify_globs	bfd992fd7aae3eb4
+110	843	7977986456255803	CMakeFiles/SFMLTest.dir/src/Config.cpp.obj	959d69150d98e164
+101	1551	7977986456170500	CMakeFiles/SFMLTest.dir/src/Board.cpp.obj	16c23b75ed5751a6
+128	1620	7977986456432097	CMakeFiles/SFMLTest.dir/src/main.cpp.obj	36caf3fb04d5c667
+117	1681	7977986456333050	CMakeFiles/SFMLTest.dir/src/Ui.cpp.obj	715c8bec4544f4da
+1682	1960	7977986471975735	SFMLTest.exe	eb79193c816e181d

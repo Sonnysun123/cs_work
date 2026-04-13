@@ -4,22 +4,21 @@
 #include <stdexcept>
 #include <string>
 using namespace std;
-
 class TextureStore {
 
-    map<string, sf::Texture> _textures;
+    std::map<std::string, sf::Texture> _textures;
 public:
     // Loads one texture from a file and stores it by name
-    void load(const string& name, const string& path) {
+    void load(const std::string& name, const std::string& path) {
         sf::Texture texture;
         if (!texture.loadFromFile(path)) {
-            throw runtime_error("Failed to load texture: " + path);
+            throw std::runtime_error("Failed to load texture: " + path);
         }
         _textures[name] = texture;
     }
 
     // Returns a stored texture using its name
-    const sf::Texture& get(const string& name) const {
+    const sf::Texture& get(const std::string& name) const {
         return _textures.at(name);
     }
 
