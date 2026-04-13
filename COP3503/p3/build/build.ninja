@@ -44,35 +44,8 @@ cmake_ninja_workdir = C$:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/
 
 build cmake_object_order_depends_target_SFMLTest: phony || .
 
-build CMakeFiles/SFMLTest.dir/src/Board.cpp.obj: CXX_COMPILER__SFMLTest_unscanned_ C$:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Board.cpp || cmake_object_order_depends_target_SFMLTest
-  DEP_FILE = CMakeFiles\SFMLTest.dir\src\Board.cpp.obj.d
-  FLAGS = -std=gnu++11
-  OBJECT_DIR = CMakeFiles\SFMLTest.dir
-  OBJECT_FILE_DIR = CMakeFiles\SFMLTest.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\SFMLTest.dir\
-  TARGET_PDB = SFMLTest.pdb
-  TARGET_SUPPORT_DIR = CMakeFiles\SFMLTest.dir
-
-build CMakeFiles/SFMLTest.dir/src/Config.cpp.obj: CXX_COMPILER__SFMLTest_unscanned_ C$:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Config.cpp || cmake_object_order_depends_target_SFMLTest
-  DEP_FILE = CMakeFiles\SFMLTest.dir\src\Config.cpp.obj.d
-  FLAGS = -std=gnu++11
-  OBJECT_DIR = CMakeFiles\SFMLTest.dir
-  OBJECT_FILE_DIR = CMakeFiles\SFMLTest.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\SFMLTest.dir\
-  TARGET_PDB = SFMLTest.pdb
-  TARGET_SUPPORT_DIR = CMakeFiles\SFMLTest.dir
-
 build CMakeFiles/SFMLTest.dir/src/TextureStore.cpp.obj: CXX_COMPILER__SFMLTest_unscanned_ C$:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/TextureStore.cpp || cmake_object_order_depends_target_SFMLTest
   DEP_FILE = CMakeFiles\SFMLTest.dir\src\TextureStore.cpp.obj.d
-  FLAGS = -std=gnu++11
-  OBJECT_DIR = CMakeFiles\SFMLTest.dir
-  OBJECT_FILE_DIR = CMakeFiles\SFMLTest.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\SFMLTest.dir\
-  TARGET_PDB = SFMLTest.pdb
-  TARGET_SUPPORT_DIR = CMakeFiles\SFMLTest.dir
-
-build CMakeFiles/SFMLTest.dir/src/Ui.cpp.obj: CXX_COMPILER__SFMLTest_unscanned_ C$:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Ui.cpp || cmake_object_order_depends_target_SFMLTest
-  DEP_FILE = CMakeFiles\SFMLTest.dir\src\Ui.cpp.obj.d
   FLAGS = -std=gnu++11
   OBJECT_DIR = CMakeFiles\SFMLTest.dir
   OBJECT_FILE_DIR = CMakeFiles\SFMLTest.dir\src
@@ -97,7 +70,7 @@ build CMakeFiles/SFMLTest.dir/src/main.cpp.obj: CXX_COMPILER__SFMLTest_unscanned
 #############################################
 # Link the executable SFMLTest.exe
 
-build SFMLTest.exe: CXX_EXECUTABLE_LINKER__SFMLTest_ CMakeFiles/SFMLTest.dir/src/Board.cpp.obj CMakeFiles/SFMLTest.dir/src/Config.cpp.obj CMakeFiles/SFMLTest.dir/src/TextureStore.cpp.obj CMakeFiles/SFMLTest.dir/src/Ui.cpp.obj CMakeFiles/SFMLTest.dir/src/main.cpp.obj | C$:/msys64/ucrt64/lib/libsfml-graphics.a C$:/msys64/ucrt64/lib/libsfml-window.a C$:/msys64/ucrt64/lib/libsfml-system.a
+build SFMLTest.exe: CXX_EXECUTABLE_LINKER__SFMLTest_ CMakeFiles/SFMLTest.dir/src/TextureStore.cpp.obj CMakeFiles/SFMLTest.dir/src/main.cpp.obj | C$:/msys64/ucrt64/lib/libsfml-graphics.a C$:/msys64/ucrt64/lib/libsfml-window.a C$:/msys64/ucrt64/lib/libsfml-system.a
   LINK_LIBRARIES = C:/msys64/ucrt64/lib/libsfml-graphics.a  C:/msys64/ucrt64/lib/libsfml-window.a  C:/msys64/ucrt64/lib/libsfml-system.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\SFMLTest.dir
   POST_BUILD = cd .

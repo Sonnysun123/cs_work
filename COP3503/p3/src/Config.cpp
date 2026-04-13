@@ -1,10 +1,8 @@
 #include "Config.h"
 #include <fstream>
 
-using namespace std;
-
-bool loadConfig(const string& path, GameConfig& config) {
-    ifstream input(path);
+bool loadConfig(const std::string& path, GameConfig& config) {
+    std::ifstream input(path);
     if (!input) {
         return false;
     }

@@ -2,21 +2,19 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 struct Tile {
     bool hasMine = false;
     bool isRevealed = false;
     bool isFlagged = false;
     int adjacentMines = 0;
-    vector<int> neighbors;
+    std::vector<int> neighbors;
 };
 
 class Board {
     int _columns;
     int _rows;
     int _mineCount;
-    vector<Tile> _tiles;
+    std::vector<Tile> _tiles;
 
     // converts a column and row into one index for the tile vector.
     int index(int col, int row) const;
@@ -37,7 +35,7 @@ public:
     // Builds a new random board by placing mines in random tile positions.
     void resetRandom();
     // Loads a board layout from a file and rebuilds the tile numbers
-    bool loadFromFile(const string& path);
+    bool loadFromFile(const std::string& path);
     // reveals one tile and spreads to nearby empty tiles when needed
     bool reveal(int col, int row);
     // places or removes a flag on a tile if that tile is still hidden
