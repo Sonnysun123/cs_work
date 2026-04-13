@@ -1,12 +1,13 @@
 #include "Config.h"
-
 #include <fstream>
 
-bool loadConfig(const std::string& path, GameConfig& config) {
-    std::ifstream input(path);
+using namespace std;
+
+bool loadConfig(const string& path, GameConfig& config) {
+    ifstream input(path);
     if (!input) {
         return false;
     }
-
-    return static_cast<bool>(input >> config.columns >> config.rows >> config.mines);
+    input >> config.columns >> config.rows >> config.mines;
+    return true;
 }

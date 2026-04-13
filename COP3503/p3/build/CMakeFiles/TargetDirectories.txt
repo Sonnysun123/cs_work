@@ -1,0 +1,3 @@
+C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/CMakeFiles/SFMLTest.dir
+C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/CMakeFiles/edit_cache.dir
+C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/CMakeFiles/rebuild_cache.dir

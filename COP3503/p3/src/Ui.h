@@ -1,21 +1,19 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
-
-#include <array>
-
+#include <vector>
 #include "TextureStore.h"
 
-constexpr int kTileSize = 32;
-constexpr int kUiHeight = 88;
-constexpr int kDigitWidth = 21;
-constexpr int kDigitHeight = 32;
+using namespace std;
+
+const int TileSize = 32;
+const int UiHeight = 88;
+const int DigitWidth = 21;
+const int DigitHeight = 32;
 
 struct Button {
     sf::Sprite sprite;
-
     bool contains(const sf::Vector2i& point) const;
 };
 
-std::array<int, 3> toThreeDigits(int value);
-void drawCounter(sf::RenderWindow& window, const TextureStore& textures, int value, float x, float y);
+vector<int> toThreeDigits(int value);
+void drawCounter(sf::RenderWindow& window, int value, float x, float y);

@@ -1,216 +1,221 @@
-#include "Board.h"
+// #include "Board.h"
+// #include "Random.h"
+// #include <fstream>
+// #include <string>
+// #include <vector>
+// //BRUHHHHH SO MUCH WORK
+// using namespace std;
 
-#include <algorithm>
-#include <cstddef>
-#include <fstream>
-#include <random>
-#include <string>
-#include <vector>
+// Random randomGenerator;
 
-Board::Board(int columns, int rows, int mineCount)
-    : columns_(columns), rows_(rows), mineCount_(mineCount), tiles_(columns * rows) {
-    buildNeighborLists();
-    resetRandom();
-}
+// int randomNumber(int minValue, int maxValue) {
+//     return randomGenerator.nextInt(minValue, maxValue);
+// }
 
-void Board::resetRandom() {
-    clearBoard();
+// Board::Board(int columns, int rows, int mineCount) : _columns(columns), _rows(rows), _mineCount(mineCount), _tiles(columns * rows) {
+//     buildNeighborLists();
+//     resetRandom();
+// }
 
-    std::vector<int> indices(tiles_.size());
-    for (std::size_t i = 0; i < indices.size(); ++i) {
-        indices[i] = static_cast<int>(i);
-    }
+// void Board::resetRandom() {
+//     clearBoard();
 
-    static std::mt19937 generator(std::random_device{}());
-    std::shuffle(indices.begin(), indices.end(), generator);
-    for (int i = 0; i < mineCount_; ++i) {
-        tiles_[indices[i]].hasMine = true;
-    }
+//     int minesPlaced = 0;
+//     int lastIndex = static_cast<int>(_tiles.size()) - 1;
 
-    finalizeBoardState();
-}
+//     while (minesPlaced < _mineCount) {
+//         int randomIndex = randomNumber(0, lastIndex);
 
-bool Board::loadFromFile(const std::string& path) {
-    std::ifstream input(path);
-    if (!input) {
-        return false;
-    }
+//         if (_tiles[randomIndex].hasMine) {
+//             continue;
+//         }
 
-    clearBoard();
-    std::string line;
-    int row = 0;
-    int loadedMineCount = 0;
-    while (std::getline(input, line) && row < rows_) {
-        for (int col = 0; col < columns_ && col < static_cast<int>(line.size()); ++col) {
-            const bool isMine = line[col] == '1';
-            Tile& tile = tiles_[index(col, row)];
-            tile.hasMine = isMine;
-            if (isMine) {
-                ++loadedMineCount;
-            }
-        }
-        ++row;
-    }
+//         _tiles[randomIndex].hasMine = true;
+//         minesPlaced = minesPlaced + 1;
+//     }
 
-    mineCount_ = loadedMineCount;
-    finalizeBoardState();
-    return true;
-}
+//     finalizeBoardState();
+// }
 
-bool Board::reveal(int col, int row) {
-    if (!isInside(col, row)) {
-        return false;
-    }
+// bool Board::loadFromFile(const string& path) {
+//     ifstream input(path);
+//     if (!input) {
+//         return false;
+//     }
+//     clearBoard();
+//     string line;
+//     int row = 0;
+//     int loadedMineCount = 0;
+//     while (getline(input, line) && row < _rows) {
+//         for (int col = 0; col < _columns && col < static_cast<int>(line.size()); ++col) {
+//             bool isMine = (line[col] == '1');
+//             Tile& tile = _tiles[index(col, row)];
+//             tile.hasMine = isMine;
+//             if (isMine) {
+//                 loadedMineCount++;
+//             }
+//         }
+//         row++;
+//     }
 
-    Tile& start = tiles_[index(col, row)];
-    if (start.isFlagged || start.isRevealed) {
-        return false;
-    }
+//     _mineCount = loadedMineCount;
+//     finalizeBoardState();
+//     return true;
+// }
 
-    start.isRevealed = true;
-    if (start.hasMine) {
-        return true;
-    }
+// bool Board::reveal(int col, int row) {
+//     if (!isInside(col, row)) {
+//         return false;
+//     }
 
-    if (start.adjacentMines != 0) {
-        return false;
-    }
+//     Tile& start = _tiles[index(col, row)];
+//     if (start.isFlagged || start.isRevealed) {
+//         return false;
+//     }
 
-    std::vector<int> stack{index(col, row)};
-    while (!stack.empty()) {
-        const int currentIndex = stack.back();
-        stack.pop_back();
-        Tile& current = tiles_[currentIndex];
+//     start.isRevealed = true;
+//     if (start.hasMine) {
+//         return true;
+//     }
 
-        for (const int neighborIndex : current.neighbors) {
-            Tile& neighbor = tiles_[neighborIndex];
-            if (neighbor.isRevealed || neighbor.isFlagged || neighbor.hasMine) {
-                continue;
-            }
+//     if (start.adjacentMines != 0) {
+//         return false;
+//     }
 
-            neighbor.isRevealed = true;
-            if (neighbor.adjacentMines == 0) {
-                stack.push_back(neighborIndex);
-            }
-        }
-    }
+//     vector<int> stack{index(col, row)};
+//     while (!stack.empty()) {
+//         const int currentIndex = stack.back();
+//         stack.pop_back();
+//         Tile& current = _tiles[currentIndex];
 
-    return false;
-}
+//         for (const int neighborIndex : current.neighbors) {
+//             Tile& neighbor = _tiles[neighborIndex];
+//             if (neighbor.isRevealed || neighbor.isFlagged || neighbor.hasMine) {
+//                 continue;
+//             }
 
-void Board::toggleFlag(int col, int row) {
-    if (!isInside(col, row)) {
-        return;
-    }
+//             neighbor.isRevealed = true;
+//             if (neighbor.adjacentMines == 0) {
+//                 stack.push_back(neighborIndex);
+//             }
+//         }
+//     }
 
-    Tile& tile = tiles_[index(col, row)];
-    if (tile.isRevealed) {
-        return;
-    }
+//     return false;
+// }
 
-    tile.isFlagged = !tile.isFlagged;
-}
+// void Board::toggleFlag(int col, int row) {
+//     if (!isInside(col, row)) {
+//         return;
+//     }
 
-bool Board::hasWon() const {
-    for (const Tile& tile : tiles_) {
-        if (!tile.hasMine && !tile.isRevealed) {
-            return false;
-        }
-    }
-    return true;
-}
+//     Tile& tile = _tiles[index(col, row)];
+//     if (tile.isRevealed) {
+//         return;
+//     }
 
-void Board::autoFlagAllMines() {
-    for (Tile& tile : tiles_) {
-        if (tile.hasMine) {
-            tile.isFlagged = true;
-        }
-    }
-}
+//     tile.isFlagged = !tile.isFlagged;
+// }
 
-int Board::minesRemaining() const {
-    return mineCount_ - flagCount();
-}
+// bool Board::hasWon() const {
+//     for (const Tile& tile : _tiles) {
+//         if (!tile.hasMine && !tile.isRevealed) {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
 
-int Board::columns() const {
-    return columns_;
-}
+// void Board::autoFlagAllMines() {
+//     for (Tile& tile : _tiles) {
+//         if (tile.hasMine) {
+//             tile.isFlagged = true;
+//         }
+//     }
+// }
 
-int Board::rows() const {
-    return rows_;
-}
+// int Board::minesRemaining() const {
+//     return _mineCount - flagCount();
+// }
 
-int Board::mineCount() const {
-    return mineCount_;
-}
+// int Board::columns() const {
+//     return _columns;
+// }
 
-const Tile& Board::tileAt(int col, int row) const {
-    return tiles_[index(col, row)];
-}
+// int Board::rows() const {
+//     return _rows;
+// }
 
-int Board::index(int col, int row) const {
-    return row * columns_ + col;
-}
+// int Board::mineCount() const {
+//     return _mineCount;
+// }
 
-bool Board::isInside(int col, int row) const {
-    return col >= 0 && col < columns_ && row >= 0 && row < rows_;
-}
+// const Tile& Board::tileAt(int col, int row) const {
+//     return _tiles[index(col, row)];
+// }
 
-void Board::clearBoard() {
-    for (Tile& tile : tiles_) {
-        tile.hasMine = false;
-        tile.isRevealed = false;
-        tile.isFlagged = false;
-        tile.adjacentMines = 0;
-    }
-}
+// int Board::index(int col, int row) const {
+//     return row * _columns + col;
+// }
 
-void Board::buildNeighborLists() {
-    for (int row = 0; row < rows_; ++row) {
-        for (int col = 0; col < columns_; ++col) {
-            Tile& tile = tiles_[index(col, row)];
-            tile.neighbors.clear();
+// bool Board::isInside(int col, int row) const {
+//     return col >= 0 && col < _columns && row >= 0 && row < _rows;
+// }
 
-            for (int yOffset = -1; yOffset <= 1; ++yOffset) {
-                for (int xOffset = -1; xOffset <= 1; ++xOffset) {
-                    if (xOffset == 0 && yOffset == 0) {
-                        continue;
-                    }
+// void Board::clearBoard() {
+//     for (Tile& tile : _tiles) {
+//         tile.hasMine = false;
+//         tile.isRevealed = false;
+//         tile.isFlagged = false;
+//         tile.adjacentMines = 0;
+//     }
+// }
 
-                    const int neighborCol = col + xOffset;
-                    const int neighborRow = row + yOffset;
-                    if (isInside(neighborCol, neighborRow)) {
-                        tile.neighbors.push_back(index(neighborCol, neighborRow));
-                    }
-                }
-            }
-        }
-    }
-}
+// void Board::buildNeighborLists() {
+//     for (int row = 0; row < _rows; ++row) {
+//         for (int col = 0; col < _columns; ++col) {
+//             Tile& tile = _tiles[index(col, row)];
+//             tile.neighbors.clear();
 
-void Board::finalizeBoardState() {
-    for (Tile& tile : tiles_) {
-        tile.isRevealed = false;
-        tile.isFlagged = false;
-        tile.adjacentMines = 0;
-        if (tile.hasMine) {
-            continue;
-        }
+//             for (int yOffset = -1; yOffset <= 1; yOffset++) {
+//                 for (int xOffset = -1; xOffset <= 1; xOffset++) {
+//                     if (xOffset == 0 && yOffset == 0) {
+//                         continue;
+//                     }
+//                     const int neighborCol = col + xOffset;
+//                     const int neighborRow = row + yOffset;
+//                     if (isInside(neighborCol, neighborRow)) {
+//                         tile.neighbors.push_back(index(neighborCol, neighborRow));
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
-        for (const int neighborIndex : tile.neighbors) {
-            if (tiles_[neighborIndex].hasMine) {
-                ++tile.adjacentMines;
-            }
-        }
-    }
-}
+// void Board::finalizeBoardState() {
+//     for (Tile& tile : _tiles) {
+//         tile.isRevealed = false;
+//         tile.isFlagged = false;
+//         tile.adjacentMines = 0;
+//         if (tile.hasMine) {
+//             continue;
+//         }
 
-int Board::flagCount() const {
-    int count = 0;
-    for (const Tile& tile : tiles_) {
-        if (tile.isFlagged) {
-            ++count;
-        }
-    }
-    return count;
-}
+//         for (const int neighborIndex : tile.neighbors) {
+//             if (_tiles[neighborIndex].hasMine) {
+//                 tile.adjacentMines++;
+//             }
+//         }
+//     }
+// }
+
+// int Board::flagCount() const {
+//     int count = 0;
+//     for (const Tile& tile : _tiles) {
+//         if (tile.isFlagged) {
+//             count++;
+//         }
+//     }
+//     return count;
+// }

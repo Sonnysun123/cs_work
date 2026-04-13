@@ -1,6 +1,7 @@
 #pragma once
-
 #include <string>
+
+using namespace std;
 
 struct GameConfig {
     int columns = 25;
@@ -8,4 +9,5 @@ struct GameConfig {
     int mines = 50;
 };
 
-bool loadConfig(const std::string& path, GameConfig& config);
+// reads the board settings from the config file
+bool loadConfig(const string& path, GameConfig& config);
