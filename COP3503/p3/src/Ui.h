@@ -4,7 +4,7 @@
 #include "TextureManager.h"
 
 const int TileSize = 32;
-const int UiHeight = 88;
+const int UiHeight = 100;
 const int DigitWidth = 21;
 const int DigitHeight = 32;
 
