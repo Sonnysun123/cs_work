@@ -7,6 +7,7 @@ set(OLD_GLOB
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Board.cpp"
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Config.cpp"
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Random.cpp"
+  "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/TextureManager.cpp"
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Ui.cpp"
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/main.cpp"
   )

@@ -3,16 +3,16 @@
 #include <iostream>
 #include "Board.h"
 #include "Config.h"
-#include "TextureStore.h"
+#include "TextureManager.h"
 #include "Ui.h"
 using namespace std;
 
 void resetRandomBoard(Board& board, const GameConfig& config, bool& debugMode, bool& gameLost, bool& gameWon);
 void loadBoard(Board& board, const string& path, bool& debugMode, bool& gameLost, bool& gameWon);
-void setButtonTextures(Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, const TextureStore& textures);
+void setButtonTextures(Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button);
 void setButtonPositions(Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, int windowWidth, int rowCount);
-void drawBoard(sf::RenderWindow& window, const Board& board, const GameConfig& config, const TextureStore& textures, bool debugMode, bool gameLost, bool gameWon);
-void drawGame(sf::RenderWindow& window, const Board& board, const GameConfig& config, const TextureStore& textures, Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, bool debugMode, bool gameLost, bool gameWon);
+void drawBoard(sf::RenderWindow& window, const Board& board, const GameConfig& config, bool debugMode, bool gameLost, bool gameWon);
+void drawGame(sf::RenderWindow& window, const Board& board, const GameConfig& config, Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, bool debugMode, bool gameLost, bool gameWon);
 
 int main() {
     GameConfig config;
@@ -21,9 +21,6 @@ int main() {
         return 0;
     }
     cout << "Loaded config: " << config.columns << " columns, " << config.rows << " rows, " << config.mines << " mines" << endl;
-
-    TextureStore textures;
-    LoadAllTextures(textures);
 
     const int windowWidth = config.columns * TileSize;
     const int windowHeight = config.rows * TileSize + UiHeight;
@@ -39,7 +36,7 @@ int main() {
     Button test2Button;
     Button test3Button;
 
-    setButtonTextures(face, debugButton, test1Button, test2Button, test3Button, textures);
+    setButtonTextures(face, debugButton, test1Button, test2Button, test3Button);
     setButtonPositions(face, debugButton, test1Button, test2Button, test3Button, windowWidth, config.rows);
 
     while (window.isOpen()) {
@@ -119,9 +116,11 @@ int main() {
                 }
             }
         }
-        drawGame(window, board, config, textures, face, debugButton, test1Button, test2Button, test3Button,
+        drawGame(window, board, config, face, debugButton, test1Button, test2Button, test3Button,
                  debugMode, gameLost, gameWon);
     }
+
+    TextureManager::Clear();
 
     return 0;
 }
@@ -141,12 +140,12 @@ void loadBoard(Board& board, const string& path, bool& debugMode, bool& gameLost
     }
 }
 
-void setButtonTextures(Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, const TextureStore& textures) {
-    face.sprite.setTexture(textures.get("face_happy"));
-    debugButton.sprite.setTexture(textures.get("debug"));
-    test1Button.sprite.setTexture(textures.get("test_1"));
-    test2Button.sprite.setTexture(textures.get("test_2"));
-    test3Button.sprite.setTexture(textures.get("test_3"));
+void setButtonTextures(Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button) {
+    face.sprite.setTexture(TextureManager::GetTexture("face_happy"));
+    debugButton.sprite.setTexture(TextureManager::GetTexture("debug"));
+    test1Button.sprite.setTexture(TextureManager::GetTexture("test_1"));
+    test2Button.sprite.setTexture(TextureManager::GetTexture("test_2"));
+    test3Button.sprite.setTexture(TextureManager::GetTexture("test_3"));
 }
 
 void setButtonPositions(Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, int windowWidth, int rowCount) {
@@ -157,7 +156,7 @@ void setButtonPositions(Button& face, Button& debugButton, Button& test1Button, 
     test3Button.sprite.setPosition(static_cast<float>(windowWidth - 112), static_cast<float>(rowCount * TileSize));
 }
 
-void drawBoard(sf::RenderWindow& window, const Board& board, const GameConfig& config, const TextureStore& textures, bool debugMode, bool gameLost, bool gameWon) {
+void drawBoard(sf::RenderWindow& window, const Board& board, const GameConfig& config, bool debugMode, bool gameLost, bool gameWon) {
     for (int row = 0; row < config.rows; row++) {
         for (int col = 0; col < config.columns; ++col) {
             const Tile& tile = board.tileAt(col, row);
@@ -172,9 +171,9 @@ void drawBoard(sf::RenderWindow& window, const Board& board, const GameConfig& c
                 shouldUseRevealedTile = true;
             }
 
-            sf::Sprite baseSprite(textures.get("tile_hidden"));
+            sf::Sprite baseSprite(TextureManager::GetTexture("tile_hidden"));
             if (shouldUseRevealedTile) {
-                baseSprite.setTexture(textures.get("tile_revealed"), true);
+                baseSprite.setTexture(TextureManager::GetTexture("tile_revealed"), true);
             }
             baseSprite.setPosition(drawX, drawY);
             window.draw(baseSprite);
@@ -190,19 +189,19 @@ void drawBoard(sf::RenderWindow& window, const Board& board, const GameConfig& c
             }
 
             if (tile.isRevealed && !tile.hasMine && tile.adjacentMines > 0) {
-                sf::Sprite numberSprite(textures.get("number_" + to_string(tile.adjacentMines)));
+                sf::Sprite numberSprite(TextureManager::GetTexture("number_" + to_string(tile.adjacentMines)));
                 numberSprite.setPosition(drawX, drawY);
                 window.draw(numberSprite);
             }
 
             if (showMine) {
-                sf::Sprite mineSprite(textures.get("mine"));
+                sf::Sprite mineSprite(TextureManager::GetTexture("mine"));
                 mineSprite.setPosition(drawX, drawY);
                 window.draw(mineSprite);
             }
 
             if (tile.isFlagged && !tile.isRevealed) {
-                sf::Sprite flagSprite(textures.get("flag"));
+                sf::Sprite flagSprite(TextureManager::GetTexture("flag"));
                 flagSprite.setPosition(drawX, drawY);
                 window.draw(flagSprite);
             }
@@ -210,18 +209,18 @@ void drawBoard(sf::RenderWindow& window, const Board& board, const GameConfig& c
     }
 }
 
-void drawGame(sf::RenderWindow& window, const Board& board, const GameConfig& config, const TextureStore& textures, Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, bool debugMode, bool gameLost, bool gameWon) {
+void drawGame(sf::RenderWindow& window, const Board& board, const GameConfig& config, Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button, bool debugMode, bool gameLost, bool gameWon) {
     if (gameWon) {
-        face.sprite.setTexture(textures.get("face_win"), true);
+        face.sprite.setTexture(TextureManager::GetTexture("face_win"), true);
     } else if (gameLost) {
-        face.sprite.setTexture(textures.get("face_lose"), true);
+        face.sprite.setTexture(TextureManager::GetTexture("face_lose"), true);
     } else {
-        face.sprite.setTexture(textures.get("face_happy"), true);
+        face.sprite.setTexture(TextureManager::GetTexture("face_happy"), true);
     }
 
     window.clear(sf::Color::White);
-    drawBoard(window, board, config, textures, debugMode, gameLost, gameWon);
-    drawCounter(window, textures, board.minesRemaining(), 0.0f, static_cast<float>(config.rows * TileSize));
+    drawBoard(window, board, config, debugMode, gameLost, gameWon);
+    drawCounter(window, board.minesRemaining(), 0.0f, static_cast<float>(config.rows * TileSize));
     window.draw(face.sprite);
     window.draw(debugButton.sprite);
     window.draw(test1Button.sprite);
