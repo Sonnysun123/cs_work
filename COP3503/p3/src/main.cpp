@@ -7,6 +7,7 @@
 #include "Ui.h"
 using namespace std;
 
+void updateWinState(Board& board, bool& gameWon);
 void resetRandomBoard(Board& board, const GameConfig& config, bool& debugMode, bool& gameLost, bool& gameWon);
 void loadBoard(Board& board, const string& path, bool& debugMode, bool& gameLost, bool& gameWon);
 void setButtonTextures(Button& face, Button& debugButton, Button& test1Button, Button& test2Button, Button& test3Button);
@@ -47,6 +48,10 @@ int main() {
             }
 
             if (event.type == sf::Event::MouseButtonPressed) {
+                if (!gameLost && !gameWon) {
+                    updateWinState(board, gameWon);
+                }
+
                 const sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
                 const int col = mousePosition.x / TileSize;
                 const int row = mousePosition.y / TileSize;
@@ -64,13 +69,15 @@ int main() {
                     }
 
                     if (debugButton.contains(mousePosition)) {
-                        if (debugMode) {
-                            debugMode = false;
-                        } else {
-                            debugMode = true;
+                        if (!gameLost && !gameWon) {
+                            if (debugMode) {
+                                debugMode = false;
+                            } else {
+                                debugMode = true;
+                            }
+
+                            cout << "Debug mode state: " << debugMode << endl;
                         }
-                        
-                        cout << "Debug mode state: " << debugMode << endl;
                         continue;
                     }
 
@@ -99,11 +106,7 @@ int main() {
                             gameLost = true;
                             cout << "Hit a mine, game lost." << endl;
                         } else {
-                            if (board.hasWon()) {
-                                gameWon = true;
-                                board.autoFlagAllMines();
-                                cout << "All safe tiles revealed, game won." << endl;
-                            }
+                            updateWinState(board, gameWon);
                         }
                     }
                 }
@@ -123,6 +126,14 @@ int main() {
     TextureManager::Clear();
 
     return 0;
+}
+
+void updateWinState(Board& board, bool& gameWon) {
+    if (!gameWon && board.hasWon()) {
+        gameWon = true;
+        board.autoFlagAllMines();
+        cout << "All safe tiles revealed, game won." << endl;
+    }
 }
 
 void resetRandomBoard(Board& board, const GameConfig& config, bool& debugMode, bool& gameLost, bool& gameWon) {
