@@ -13,6 +13,12 @@
 },
 {
   "directory": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -std=gnu++17 -o CMakeFiles\\SFMLTest.dir\\src\\Random.cpp.obj -c C:\\Users\\amych\\OneDrive\\Desktop\\cs_work\\COP3503\\p3\\src\\Random.cpp",
+  "file": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Random.cpp",
+  "output": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/CMakeFiles/SFMLTest.dir/src/Random.cpp.obj"
+},
+{
+  "directory": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build",
   "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -std=gnu++17 -o CMakeFiles\\SFMLTest.dir\\src\\Ui.cpp.obj -c C:\\Users\\amych\\OneDrive\\Desktop\\cs_work\\COP3503\\p3\\src\\Ui.cpp",
   "file": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Ui.cpp",
   "output": "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/build/CMakeFiles/SFMLTest.dir/src/Ui.cpp.obj"

@@ -1,18 +1,11 @@
 #pragma once
+
 #include <random>
 
 class Random {
-    std::mt19937 _generator;
+    static std::mt19937 random;
 
 public:
-    Random() {
-        std::random_device device;
-        unsigned int seed = device();
-        _generator.seed(seed);
-    }
-
-    int nextInt(int minValue, int maxValue) {
-        std::uniform_int_distribution<int> distribution(minValue, maxValue);
-        return distribution(_generator);
-    }
+    static int Int(int min, int max);
+    static float Float(float min, float max);
 };

@@ -6,6 +6,7 @@ file(GLOB NEW_GLOB LIST_DIRECTORIES true "C:/Users/amych/OneDrive/Desktop/cs_wor
 set(OLD_GLOB
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Board.cpp"
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Config.cpp"
+  "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Random.cpp"
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/Ui.cpp"
   "C:/Users/amych/OneDrive/Desktop/cs_work/COP3503/p3/src/main.cpp"
   )

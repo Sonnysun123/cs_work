@@ -6,12 +6,6 @@
 //BRUHHHHH SO MUCH WORK
 using namespace std;
 
-Random randomGenerator;
-
-int randomNumber(int minValue, int maxValue) {
-    return randomGenerator.nextInt(minValue, maxValue);
-}
-
 Board::Board(int columns, int rows, int mineCount) : _columns(columns), _rows(rows), _mineCount(mineCount), _tiles(columns * rows) {
     buildNeighborLists();
     resetRandom();
@@ -24,7 +18,7 @@ void Board::resetRandom() {
     int lastIndex = static_cast<int>(_tiles.size()) - 1;
 
     while (minesPlaced < _mineCount) {
-        int randomIndex = randomNumber(0, lastIndex);
+        int randomIndex = Random::Int(0, lastIndex);
 
         if (_tiles[randomIndex].hasMine) {
             continue;
